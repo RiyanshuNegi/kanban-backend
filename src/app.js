@@ -3,7 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const taskRoutes = require('./routes/taskRoutes.js');
-
+const connectDB = require('./config/db');
 // Route Imports
 const authRoutes = require('./routes/authRoutes.js');
 // const taskRoutes = require('./routes/task.routes'); // Uncomment when you build tasks
@@ -22,6 +22,11 @@ app.use(cors({
   ], 
   credentials: true
 }));
+
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
 app.use(helmet()); // Set security HTTP headers
 app.use(express.json()); // Parse incoming JSON payloads
 

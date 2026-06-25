@@ -28,28 +28,30 @@ app.use(express.json()); // Parse incoming JSON payloads
 if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
-
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 
 app.use('/api/users', require('./routes/userRoutes.js')); 
 
 app.use((req, res, next) => {
-  next(new ApiError(404, `Cannot find ${req.originalUrl} on this server`));
+    next(new ApiError(404, `Cannot find ${req.originalUrl} on this server`));
 });
 
 // --- 4. Global Error Handling Middleware ---
 app.use((err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  const status = err.status || 'error';
+    const statusCode = err.statusCode || 500;
+    const status = err.status || 'error';
 
-  // Send structured error response
-  res.status(statusCode).json({
-    status: status,
-    message: err.message || 'Internal Server Error',
-    // Optionally include stack trace in development mode only
-    ...(process.env.NODE_ENV !== 'production' && { stack: err.stack })
-  });
+    // Send structured error response
+    res.status(statusCode).json({
+        status: status,
+        message: err.message || 'Internal Server Error',
+        // Optionally include stack trace in development mode only
+        ...(process.env.NODE_ENV !== 'production' && { stack: err.stack })
+    });
 });
 
+app.get('/', (req, res) => {
+  res.status(200).json({ status: "Online", message: "Kanban API is fully operational." });
+});
 module.exports = app;

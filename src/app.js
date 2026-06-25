@@ -18,7 +18,7 @@ app.use(helmet()); // Set security HTTP headers
 app.use(cors({
   origin: [
     'http://localhost:5173', 
-    'https://your-kanban-frontend-url.vercel.app' // Replace with Vercel URL
+    'https://kanban-frontend-git-main-rn7msd-gmailcoms-projects.vercel.app/' // Replace with Vercel URL
   ], 
   credentials: true
 }));

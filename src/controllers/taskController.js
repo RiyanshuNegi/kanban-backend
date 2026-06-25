@@ -1,4 +1,4 @@
-const Task = require('../models/Task');
+const Task = require('../models/Task.js');
 const ApiError = require('../utils/ApiError');
 
 exports.createTask = async (req, res, next) => {

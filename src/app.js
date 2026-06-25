@@ -14,14 +14,15 @@ const ApiError = require('./utils/ApiError');
 const app = express();
 
 // --- 1. Global Middleware ---
-app.use(helmet()); // Set security HTTP headers
 app.use(cors({
   origin: [
     'http://localhost:5173', 
-    'https://kanban-frontend-git-main-rn7msd-gmailcoms-projects.vercel.app/' // Replace with Vercel URL
+    'https://kanban-frontend-git-main-rn7msd-gmailcoms-projects.vercel.app/',
+    'https://kanban-frontend-gilt-beta.vercel.app' // Replace with Vercel URL
   ], 
   credentials: true
 }));
+app.use(helmet()); // Set security HTTP headers
 app.use(express.json()); // Parse incoming JSON payloads
 
 // Enable HTTP request logging in development
